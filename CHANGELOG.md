@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.12.1](https://github.com/philippe-hjik/standard-toolset/compare/v1.12.0...v1.12.1) (2026-02-06)
+
+
+### Bug Fixes
+
+* **app:** remove nodejs from list ([682c1ba](https://github.com/philippe-hjik/standard-toolset/commit/682c1baeee131bd28a67045f361986b7291524b0))
+
 ## [1.12.0](https://github.com/philippe-hjik/standard-toolset/compare/v1.11.1...v1.12.0) (2026-02-06)
 
 
