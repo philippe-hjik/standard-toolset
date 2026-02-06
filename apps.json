@@ -40,11 +40,6 @@
     "tags":"web,project"
   },
   {
-    "name":"nodejs-lts",
-    "//comment":"Version:22.14.0 removed... just use lts",
-    "tags":"web,project"
-  },
-  {
     "//comment":"this is github desktop, not git",
     "name":"github",
     "tags":"project,devops"
