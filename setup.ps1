@@ -50,7 +50,7 @@ function Main{
 	# Download archive
 	else{
 	    Write-Output "About to download toolset..."
-	    $url="https://github.com/ETML-INF/standard-toolset/releases/latest/download/toolset.zip"
+	    $url="https://github.com/philippe-hjik/standard-toolset/releases/latest/download/toolset.zip"
 	    $timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
 	    $archivename = "toolset-$timestamp"
 	    $archivepath = "$env:TEMP\$archivename.zip"
