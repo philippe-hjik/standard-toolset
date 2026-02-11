@@ -75,16 +75,7 @@ try {
     }
     catch [System.Management.Automation.CommandNotFoundException]
     {
-        # git installation
-        scoop install git
-        try 
-        {
-        git config --global --add safe.directory 'C:/inf-toolset/*'
-        }
-        catch
-        {
-        Write-Host "git config failed"
-        }
+        Write-Host "Git n'est pas installé, si vous installer Git vous devrez relancer le script d'activation" -ForegroundColor Red
     }
 
     # NodeJS installation
