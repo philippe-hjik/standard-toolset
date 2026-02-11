@@ -67,8 +67,9 @@ try {
 
     try
     {
+        # check if git is installed
         git | Out-Null
-        "Git is installed"
+
         # add toolset has safe directory in git config
         git config --global --add safe.directory 'C:/inf-toolset/*'
     }
