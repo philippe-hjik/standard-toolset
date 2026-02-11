@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.12.2](https://github.com/philippe-hjik/standard-toolset/compare/v1.12.1...v1.12.2) (2026-02-11)
+
+
+### Bug Fixes
+
+* **gitconfig:** replace file by cmd line ([a01dccf](https://github.com/philippe-hjik/standard-toolset/commit/a01dccfd8a92b90e2968fdfae05042f4917f0af4))
+
+
+### Miscellaneous Chores
+
+* release 1.12.2 ([d2c7d49](https://github.com/philippe-hjik/standard-toolset/commit/d2c7d49d76ef194d17a8107a8ebb48bdc8009cbf))
+
 ## [1.12.1](https://github.com/philippe-hjik/standard-toolset/compare/v1.12.0...v1.12.1) (2026-02-06)
 
 
