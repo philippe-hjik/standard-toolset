@@ -89,11 +89,6 @@
     "name": "mqttx",
     "bucket": "extras",
     "tags": "web,dev"
-  },
-  {
-    "name": "git",
-    "bucket": "main",
-    "tags": "system"
   }
 ]
 
