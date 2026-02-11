@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.13.0](https://github.com/philippe-hjik/standard-toolset/compare/v1.12.2...v1.13.0) (2026-02-11)
+
+
+### Miscellaneous Chores
+
+* release 1.13.0 ([9a741d4](https://github.com/philippe-hjik/standard-toolset/commit/9a741d462de88ad6de9417a1fcaa304d20333483))
+
 ## [1.12.2](https://github.com/philippe-hjik/standard-toolset/compare/v1.12.1...v1.12.2) (2026-02-11)
 
 
