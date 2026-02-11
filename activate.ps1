@@ -65,9 +65,17 @@ try {
     & reg import "$vscode\install-context.reg"
     Write-Output "VSCode context menu added/updated"
 
-    # Git configuration (only user config not system config)
-    $PSScriptRoot/gitconfig.ps1 "$env:USERPROFILE\.gitconfig"
-    Write-Output "gitconfig safe directory added/updated"
+    try
+    {
+        git | Out-Null
+        "Git is installed"
+        # add toolset has safe directory in git config
+        git config --global --add safe.directory 'C:/inf-toolset/*'
+    }
+    catch [System.Management.Automation.CommandNotFoundException]
+    {
+        "No git"
+    }
 
     # Git configuration (only user config not system config)
     Write-Host "Installing nodejs-lts" -ForegroundColor Green
