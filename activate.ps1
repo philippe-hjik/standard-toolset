@@ -74,10 +74,19 @@ try {
     }
     catch [System.Management.Automation.CommandNotFoundException]
     {
-        "No git"
+        # git installation
+        scoop install git
+        try 
+        {
+        git config --global --add safe.directory 'C:/inf-toolset/*'
+        }
+        catch
+        {
+        Write-Host "git config failed"
+        }
     }
 
-    # Git configuration (only user config not system config)
+    # NodeJS installation
     Write-Host "Installing nodejs-lts" -ForegroundColor Green
     scoop install nodejs-lts
 
