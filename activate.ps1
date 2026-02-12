@@ -80,9 +80,6 @@ try {
 
     # NodeJS installation
     Write-Host "Fixing nodejs-lts" -ForegroundColor Green
-    
-    # Create a WScript.Shell COM object
-    #Get-ChildItem -Path "C:\inf-toolset\scoop\apps\nodejs-lts\24.11.1\node_modules\npm\*" -Recurse -File | Select-String -Pattern "D:\\a\\standard-toolset\\standard-toolset\\build\\scoop\\persist\\nodejs-lts"
 
     $old = 'D:\\a\\standard-toolset\\standard-toolset\\build\\scoop\\persist\\nodejs-lts'
     $new = 'C:\inf-toolset\scoop\apps\nodejs-lts\24.11.1\'
@@ -92,8 +89,6 @@ try {
         (Get-Content $_.FullName) -replace $old, $new |
         Set-Content $_.FullName
     }
-
-    Write-Host "Done fixing NodeJS" -ForegroundColor Green
 
     # Add toolbar for shorcuts
     # Define the path to Scoop shortcuts folder
