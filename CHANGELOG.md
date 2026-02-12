@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.13.1](https://github.com/philippe-hjik/standard-toolset/compare/v1.13.0...v1.13.1) (2026-02-12)
+
+
+### Bug Fixes
+
+* **apps:** added nodejs-lts back ([da5e5d2](https://github.com/philippe-hjik/standard-toolset/commit/da5e5d25b8f21a526931ec6943efce726512429c))
+* **git:** add safe directory only if git exist and don't install git ([0817384](https://github.com/philippe-hjik/standard-toolset/commit/0817384dfc626605b19ca1ddc1ec450fd82f096c))
+* **nodejs-lts:** fixing path problem from CIDD ([51a0120](https://github.com/philippe-hjik/standard-toolset/commit/51a0120a64fcbc38f7e77789deb8b7a25c6916a7))
+
 ## [1.13.0](https://github.com/philippe-hjik/standard-toolset/compare/v1.12.2...v1.13.0) (2026-02-11)
 
 
