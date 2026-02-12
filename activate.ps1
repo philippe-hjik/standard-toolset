@@ -75,7 +75,7 @@ try {
     }
     catch [System.Management.Automation.CommandNotFoundException]
     {
-        Write-Host "Git n'est pas installé, si vous installer Git vous devrez relancer le script d'activation" -ForegroundColor Red
+        Write-Host "Git is not install, si vous voulez installer Git plus tard, vous devrez relancer le script d'activation" -ForegroundColor Red
     }
 
     # NodeJS installation
