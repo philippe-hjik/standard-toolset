@@ -41,7 +41,7 @@ function Main{
 	    {
 			$archivepath = $localarchivepath
 			Write-Host "Found local $archivepath"
-			$naspath = "C:\Users\philippe\Downloads\"
+			$naspath = "C:\Users\philippe\Desktop\nas\toolset"
 			# $naspath = "L:\toolset"
 			if("$localarchivepath*" -like $naspath)
 			{
