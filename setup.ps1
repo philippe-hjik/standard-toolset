@@ -64,8 +64,9 @@ function Main{
 					$installpath = "C:\inf-toolset"
 
 					# Get current toolset version
-					$localversion = Get-Content "$installpath\VERSION.txt" -replace '^v'
-
+					$localversion = Get-Content "$installpath\VERSION.txt"
+					$localversion -replace '^v'
+					
 					# Check if a toolset was already installed
 					if(Test-Path $installpath)
 					{
