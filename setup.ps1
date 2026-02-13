@@ -55,7 +55,7 @@ function Main{
 				Write-Output "$naslatestversion et GitHub $latestversion"
 
 				# Check higher version between GitHub and NAS
-				if($latestversion -gt $naslatestversion)
+				if([version]$latestversion -gt [version]$naslatestversion)
 				{
 					# TODO tester les droits, savoir si on copie ou pas
 					Write-Output "Une version plus récente est disponible sur GitHub $latestversion actuel : $naslatestversion"
@@ -70,7 +70,7 @@ function Main{
 					if(Test-Path $installpath)
 					{
 						# Check higher version between NAS and current toolset version
-						if($naslatestversion -gt $localversion)
+						if([version]$naslatestversion -gt [version]$localversion)
 						{
 							Write-Output "About to copy toolset from NAS server..."
 							$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
@@ -78,7 +78,7 @@ function Main{
 							$archivepath = "$env:TEMP\$archivename.zip"
 							
 							Write-Output "$archivepath"
-							
+
 							# TODO checker quel exit utiliser exit 1,2,3 ?
 							if (-not (Copy-Item -Path "$naspath\$naslatestversion" -Destination $archivepath)) {
 							exit 1
