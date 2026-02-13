@@ -69,19 +69,53 @@ function Main{
 						# Check higher version between NAS and current toolset version
 						if($naslatestversion > $localversion)
 						{
-							Write-Output "New version available"
+							Write-Output "About to copy toolset from NAS server..."
+							$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
+							$archivename = "toolset-$timestamp"
+							$archivepath = "$env:TEMP\$archivename.zip"
 
-							# TODO il faudra surment unzip le dossier
+							# TODO checker quel exit utiliser exit 1,2,3 ?
+							if (-not (Copy-Item -Path "$naspath\$naslatestversion" -Destination $archivepath)) {
+							exit 1
+							}
+
+							# Extract
+							if(Test-Path -Path "$archivepath" -PathType Container)
+							{
+								$archivedirectory=$archivepath
+								if(-not ((Test-Path -Path "$archivepath\version.txt") -and (Test-Path -Path "$archivepath\scoop\apps\scoop\current\bin\scoop.ps1")))
+								{
+								Write-Error "$archivedirectory seems invalid, please check, aborting install!"
+								Exit 3
+								}
+							}
+							else{
+								# $env:TEMP may bring "path too long issue..."
+								$archivedirectory = "$env:USERPROFILE\ets$(Get-Random)"
+								Write-Output "About to extract $archivepath to $archivedirectory"
+								Expand-Archive $archivepath $archivedirectory
+							}
+							
+							# Compress-Archive excludes (hard coded) .git directories.. they have been renamed before zipping, they need to be adjusted!
+							Get-ChildItem -Path $archivedirectory -Recurse -Directory -Force -Filter ".git-force" | Rename-Item -NewName ".git"
+
+							# Install
+							Write-Output "About to launch install script"
+							Set-Location $archivedirectory
+							& .\install.ps1 -Destination "$Destination" -Nointeraction $Nointeraction
+
+							# Cleaning up
+							Write-Output "Trying to clean up some stuff"
+							try {
+								Remove-Item -Force -Recurse "$archivedirectory/scoop"
+								Remove-Item -Force -Recurse "$archivedirectory"    
+							}
+							catch {
+								Write-Warning "Unable to clean $archivedirectory : $_. "
+							}
 						}
 					}
-					else
-					{
-
-					}
-
-					
 				}
-
 			}
 	    }
 	    else{
@@ -125,7 +159,7 @@ function Main{
 	# Install
 	Write-Output "About to launch install script"
 	Set-Location $archivedirectory
-	& .\install.ps1 -Destination "$Destination" -Nointeraction $Nointeraction
+	& .\install.ps1 -Destination "$installpath" -Nointeraction $Nointeraction
 
 	# Cleaning up
 	Write-Output "Trying to clean up some stuff"
