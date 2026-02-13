@@ -81,7 +81,7 @@ function Main{
 							Write-Output "$archivepath"
 
 							# TODO checker quel exit utiliser exit 1,2,3 ?
-							if (-not (Copy-Item -Path "$naspath\v$naslatestversion" -Destination $archivepath)) {
+							if (-not (Copy-Item -Path "$naspath\v$naslatestversion.zip" -Destination $archivepath)) {
 							exit 1
 							}
 
