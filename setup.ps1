@@ -43,7 +43,7 @@ function Main{
 			Write-Host "Found local $archivepath"
 			$naspath = "C:\Users\philippe\Desktop\nas\toolset"
 			# $naspath = "L:\toolset"
-			if("$localarchivepath*" -like $naspath)
+			if($naspath -like "$localarchivepath*")
 			{
 				# Get latest version tag on GitHub ex: v1.13.1
 				$url = "https://api.github.com/repos/philippe-hjik/standard-toolset/releases/latest"
