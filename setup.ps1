@@ -49,7 +49,7 @@ function Main{
 				$response = Invoke-RestMethod -Uri $url
 				$latestversion = $response.tag_name
 
-				$naslatestversion = (Get-ChildItem | Sort-Object -Descending | select -first 1).Name
+				$naslatestversion = (Get-ChildItem | Sort-Object -Descending | Select-Object -first 1).Name
 				
 				# Check higher version between GitHub and NAS
 				if($latestversion > $naslatestversion)
@@ -102,7 +102,7 @@ function Main{
 							# Install
 							Write-Output "About to launch install script"
 							Set-Location $archivedirectory
-							& .\install.ps1 -Destination "$Destination" -Nointeraction $Nointeraction
+							& .\install.ps1 -Destination "$installpath" -Nointeraction $Nointeraction
 
 							# Cleaning up
 							Write-Output "Trying to clean up some stuff"
@@ -159,7 +159,7 @@ function Main{
 	# Install
 	Write-Output "About to launch install script"
 	Set-Location $archivedirectory
-	& .\install.ps1 -Destination "$installpath" -Nointeraction $Nointeraction
+	& .\install.ps1 -Destination "$Destination" -Nointeraction $Nointeraction
 
 	# Cleaning up
 	Write-Output "Trying to clean up some stuff"
