@@ -179,7 +179,6 @@ function Main{
 	    Write-Warning "Unable to clean $archivedirectory : $_. "
 	}
 
-	
 	if(!$local)
 	{
 	    Remove-Item $archivepath
