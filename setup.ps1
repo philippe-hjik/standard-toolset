@@ -50,7 +50,7 @@ function Main{
 				$response = Invoke-RestMethod -Uri $url
 				$latestversion = $response.tag_name
 
-				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).Name
+				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName
 				
 				# Check higher version between GitHub and NAS
 				if($latestversion -gt $naslatestversion)
