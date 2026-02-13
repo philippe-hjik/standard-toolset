@@ -76,7 +76,9 @@ function Main{
 							$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
 							$archivename = "toolset-$timestamp"
 							$archivepath = "$env:TEMP\$archivename.zip"
-
+							
+							Write-Output "$archivepath"
+							
 							# TODO checker quel exit utiliser exit 1,2,3 ?
 							if (-not (Copy-Item -Path "$naspath\$naslatestversion" -Destination $archivepath)) {
 							exit 1
