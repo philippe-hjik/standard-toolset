@@ -39,11 +39,54 @@ function Main{
 	    
 	    if(![string]::IsNullOrEmpty($localarchivepath))
 	    {
-		$archivepath = $localarchivepath
-		Write-Host "Found local $archivepath"
+			$archivepath = $localarchivepath
+			Write-Host "Found local $archivepath"
+			$naspath = "L:\toolset"
+			if($naspath -like "$localarchivepath*")
+			{
+				# Get latest version tag on GitHub ex: v1.13.1
+				$url = "https://api.github.com/repos/philippe-hjik/standard-toolset/releases/latest"
+				$response = Invoke-RestMethod -Uri $url
+				$latestversion = $response.tag_name
+
+				$naslatestversion = (Get-ChildItem | Sort-Object -Descending | select -first 1).Name
+				
+				# Check higher version between GitHub and NAS
+				if($latestversion > $naslatestversion)
+				{
+					# TODO tester les droits, savoir si on copie ou pas
+					Write-Output "Une version plus récente est disponible sur GitHub $latestversion actuel : $naslatestversion"
+				} else {
+					# Where the toolset will be installed or already installed
+					$installpath = "C:\inf-toolset"
+
+					# Get current toolset version
+					$localversion = Get-Content "$installpath\VERSION.txt"
+
+					# Check if a toolset was already installed
+					if(Test-Path $installpath)
+					{
+						# Check higher version between NAS and current toolset version
+						if($naslatestversion > $localversion)
+						{
+							Write-Output "New version available"
+
+							# TODO il faudra surment unzip le dossier
+						}
+					}
+					else
+					{
+
+					}
+
+					
+				}
+
+			}
 	    }
 	    else{
 		Write-Error "No local archive found, aborting local install"
+		Write-Error "Searching in"
 		Exit 2
 	    }
 	}
