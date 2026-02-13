@@ -52,6 +52,8 @@ function Main{
 
 				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName
 				
+				Write-Output "$naslatestversions et GitHub $latestversion"
+
 				# Check higher version between GitHub and NAS
 				if($latestversion -gt $naslatestversion)
 				{
