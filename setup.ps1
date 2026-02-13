@@ -82,6 +82,7 @@ function Main{
 
 							# TODO checker quel exit utiliser exit 1,2,3 ?
 							if (-not (Copy-Item -Path "$naspath\v$naslatestversion.zip" -Destination $archivepath)) {
+							Write-Error "Erreur 85"
 							exit 1
 							}
 
