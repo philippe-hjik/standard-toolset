@@ -42,7 +42,8 @@ function Main{
 			$archivepath = $localarchivepath
 			Write-Host "Found local $archivepath"
 			$naspath = "C:\Users\philippe\Downloads\"
-			if($naspath -like "$localarchivepath*")
+			# $naspath = "L:\toolset"
+			if("$localarchivepath*" -like $naspath)
 			{
 				# Get latest version tag on GitHub ex: v1.13.1
 				$url = "https://api.github.com/repos/philippe-hjik/standard-toolset/releases/latest"
@@ -52,7 +53,7 @@ function Main{
 				$naslatestversion = (Get-ChildItem | Sort-Object -Descending | Select-Object -first 1).Name
 				
 				# Check higher version between GitHub and NAS
-				if($latestversion > $naslatestversion)
+				if($latestversion -gt $naslatestversion)
 				{
 					# TODO tester les droits, savoir si on copie ou pas
 					Write-Output "Une version plus récente est disponible sur GitHub $latestversion actuel : $naslatestversion"
@@ -67,7 +68,7 @@ function Main{
 					if(Test-Path $installpath)
 					{
 						# Check higher version between NAS and current toolset version
-						if($naslatestversion > $localversion)
+						if($naslatestversion -gt $localversion)
 						{
 							Write-Output "About to copy toolset from NAS server..."
 							$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
