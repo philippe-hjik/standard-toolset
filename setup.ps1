@@ -88,22 +88,10 @@ function Main{
 								exit 1
 							}
 
-							# Extract
-							if(Test-Path -Path "$archivepath" -PathType Leaf)
-							{
-								$archivedirectory=$archivepath
-								if(-not ((Test-Path -Path "$archivepath\version.txt") -and (Test-Path -Path "$archivepath\scoop\apps\scoop\current\bin\scoop.ps1")))
-								{
-								Write-Error "$archivedirectory seems invalid, please check, aborting install!"
-								Exit 3
-								}
-							}
-							else{
-								# $env:TEMP may bring "path too long issue..."
-								$archivedirectory = "$env:USERPROFILE\ets$(Get-Random)"
-								Write-Output "About to extract $archivepath to $archivedirectory"
-								Expand-Archive $archivepath $archivedirectory
-							}
+							# $env:TEMP may bring "path too long issue..."
+							$archivedirectory = "$env:USERPROFILE\ets$(Get-Random)"
+							Write-Output "About to extract $archivepath to $archivedirectory"
+							Expand-Archive $archivepath $archivedirectory
 							
 							# Compress-Archive excludes (hard coded) .git directories.. they have been renamed before zipping, they need to be adjusted!
 							Get-ChildItem -Path $archivedirectory -Recurse -Directory -Force -Filter ".git-force" | Rename-Item -NewName ".git"
