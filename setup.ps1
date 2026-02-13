@@ -86,7 +86,7 @@ function Main{
 							}
 
 							# Extract
-							if(Test-Path -Path "$archivepath" -PathType Container)
+							if(Test-Path -Path "$archivepath" -PathType Leaf)
 							{
 								$archivedirectory=$archivepath
 								if(-not ((Test-Path -Path "$archivepath\version.txt") -and (Test-Path -Path "$archivepath\scoop\apps\scoop\current\bin\scoop.ps1")))
