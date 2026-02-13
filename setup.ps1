@@ -41,7 +41,7 @@ function Main{
 	    {
 			$archivepath = $localarchivepath
 			Write-Host "Found local $archivepath"
-			$naspath = "L:\toolset"
+			$naspath = "C:\Users\philippe\Downloads\"
 			if($naspath -like "$localarchivepath*")
 			{
 				# Get latest version tag on GitHub ex: v1.13.1
@@ -114,6 +114,8 @@ function Main{
 								Write-Warning "Unable to clean $archivedirectory : $_. "
 							}
 						}
+					} else {
+						Write-Output "no tag version found"
 					}
 				}
 			}
