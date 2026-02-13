@@ -48,10 +48,10 @@ function Main{
 				# Get latest version tag on GitHub ex: v1.13.1
 				$url = "https://api.github.com/repos/philippe-hjik/standard-toolset/releases/latest"
 				$response = Invoke-RestMethod -Uri $url
-				$latestversion = $response.tag_name
+				$latestversion = $response.tag_name -replace '^v'
 
-				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName
-				
+				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName -replace '^v'
+					
 				Write-Output "$naslatestversion et GitHub $latestversion"
 
 				# Check higher version between GitHub and NAS
