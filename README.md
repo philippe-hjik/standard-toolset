@@ -8,36 +8,36 @@ La liste des apps est décrite dans le fichier [apps.json](apps.json)
 ### Cmd.exe
 
 ``` shell
-powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; Invoke-RestMethod -Uri https://github.com/ETML-INF/standard-toolset/raw/main/setup.ps1 | Invoke-Expression"
+powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; Invoke-RestMethod -Uri https://github.com/philippe-hjik/standard-toolset/raw/main/setup.ps1 | Invoke-Expression"
 ```
 
 ### Powershell / Pwsh
 ```pwsh
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-Invoke-RestMethod -Uri https://github.com/ETML-INF/standard-toolset/raw/main/setup.ps1 | Invoke-Expression
+Invoke-RestMethod -Uri https://github.com/philippe-hjik/standard-toolset/raw/main/setup.ps1 | Invoke-Expression
 ```
 
 #### En local ou offline
-Après avoir [téléchargé l’archive](https://github.com/ETML-INF/standard-toolset/releases/latest/download/toolset.zip) on peut:
+Après avoir [téléchargé l’archive](https://github.com/philippe-hjik/standard-toolset/releases/latest/download/toolset.zip) on peut:
 
 - Éviter qu’elle soit téléchargée en ajoutant ‘-Local $true’ :
 
 ```pwsh
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-& ([ScriptBlock]::Create((Invoke-RestMethod -Uri https://github.com/ETML-INF/standard-toolset/raw/main/setup.ps1))) -Local $true
+& ([ScriptBlock]::Create((Invoke-RestMethod -Uri https://github.com/philippe-hjik/standard-toolset/raw/main/setup.ps1))) -Local $true
 ```
 
 - Indiquer clairement le chemin vers le zip ET/OU le répertoire de destination (utile pour le déploiement distant) ‘-Source ... -Destination ...’:
 
 ```pwsh
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-& ([ScriptBlock]::Create((Invoke-RestMethod -Uri https://github.com/ETML-INF/standard-toolset/raw/main/setup.ps1))) -Source "C:\downloads\toolset.zip" -Destination "\\host\d$\data"
+& ([ScriptBlock]::Create((Invoke-RestMethod -Uri https://github.com/philippe-hjik/standard-toolset/raw/main/setup.ps1))) -Source "C:\downloads\toolset.zip" -Destination "\\host\d$\data"
 ```
 
 - Indiquer le chemin vers le dossier déjà décompressé (nécessite 7z ou Expand-Archive) ‘-Source c:\directory’:
 ```pwsh
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
-& ([ScriptBlock]::Create((Invoke-RestMethod -Uri https://github.com/ETML-INF/standard-toolset/raw/main/setup.ps1))) -Source "C:\downloads\toolset" -Destination "\\host\d$\data"
+& ([ScriptBlock]::Create((Invoke-RestMethod -Uri https://github.com/philippe-hjik/standard-toolset/raw/main/setup.ps1))) -Source "C:\downloads\toolset" -Destination "\\host\d$\data"
 ```
 
 - Décompresser l’archive et lancer ‘install.ps1’ [complete offline]
