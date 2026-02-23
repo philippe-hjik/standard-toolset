@@ -57,10 +57,41 @@ function Main{
 				# Check higher version between GitHub and NAS
 				if([version]$latestversion -gt [version]$naslatestversion)
 				{
-					# TODO tester les droits, savoir si on copie ou pas
 					Write-Output "Une version plus récente est disponible sur GitHub $latestversion actuel : $naslatestversion"
+					$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
+
+					try {
+						# créer un fichier pour tester les droits d'écriture
+						mkdir $naspath\"test-$timestamp" -ErrorAction Stop
+
+						# lancer un userform
+						Add-Type -AssemblyName System.Windows.Forms
+						$result = [System.Windows.Forms.MessageBox]::Show(
+							"Ajouter la version $latestversion sur le serveur ?",
+							"Confirmation",
+							[System.Windows.Forms.MessageBoxButtons]::YesNo,
+							[System.Windows.Forms.MessageBoxIcon]::Question
+						)
+
+						# telecharger le toolset sur le serveur
+						if ($result -eq "Yes") {
+							Write-Output "About to download toolset..."
+							$url="https://github.com/philippe-hjik/standard-toolset/releases/latest/download/toolset.zip"
+							$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
+							$archivename = "toolset-$timestamp"
+							$archivepath = "$naspath\v$latestversion.zip"
+
+							if (-not (DownloadWithBits -Url $url -Destination $archivepath)) {
+							exit 1
+							}
+						}
+					} catch {
+						Write-Warning "pas les droits d'écriture sur le serveur"
+					}
+
 				} else {
 					# Where the toolset will be installed or already installed
+					# TODO l'installation peut être fait sur le d: à prendre en compte
 					$installpath = "C:\inf-toolset"
 
 					# Get current toolset version
