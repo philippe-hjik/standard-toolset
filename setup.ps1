@@ -146,6 +146,8 @@ function Main{
 						Write-Output "no tag version found"
 					}
 				}
+			} else {
+				Write-Output "$localarchivepath, $naspath"
 			}
 	    }
 	    else{
