@@ -61,9 +61,12 @@ function Main{
 					$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
 
 					try {
-						# créer un fichier pour tester les droits d'écriture
+						# creer un fichier pour tester les droits d'ecriture
 						mkdir $naspath\"test-$timestamp" -ErrorAction Stop
 
+						# supprimer ce fichier
+						Remove-Item $naspath\"test-$timestamp" -ErrorAction SilentlyContinue
+						
 						# lancer un userform
 						Add-Type -AssemblyName System.Windows.Forms
 						$result = [System.Windows.Forms.MessageBox]::Show(
