@@ -37,7 +37,7 @@ function Main{
 		$localarchivepath=$Source
 	    }
 	    
-	    if(![string]::IsNullOrEmpty($a))
+	    if(![string]::IsNullOrEmpty($localarchivepath))
 	    {
 			$archivepath = $localarchivepath
 			Write-Host "Found local $archivepath"
