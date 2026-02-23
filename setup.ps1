@@ -39,11 +39,123 @@ function Main{
 	    
 	    if(![string]::IsNullOrEmpty($localarchivepath))
 	    {
-		$archivepath = $localarchivepath
-		Write-Host "Found local $archivepath"
+			$archivepath = $localarchivepath
+			Write-Host "Found local $archivepath"
+			#$naspath = "C:\Users\philippe\Desktop\nas\toolset"
+			$naspath = "L:\toolset"
+			if($localarchivepath.StartsWith($naspath))
+			{
+				# Get latest version tag on GitHub ex: v1.13.1
+				$url = "https://api.github.com/repos/philippe-hjik/standard-toolset/releases/latest"
+				$response = Invoke-RestMethod -Uri $url
+				$latestversion = $response.tag_name -replace '^v'
+
+				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName -replace '^v'
+					
+				Write-Output "$naslatestversion et GitHub $latestversion"
+
+				# Check higher version between GitHub and NAS
+				if([version]$latestversion -gt [version]$naslatestversion)
+				{
+					Write-Output "Une version plus récente est disponible sur GitHub $latestversion actuel : $naslatestversion"
+					$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
+
+					try {
+						# creer un fichier pour tester les droits d'ecriture
+						mkdir $naspath\"test-$timestamp" -ErrorAction Stop
+
+						# supprimer ce fichier
+						Remove-Item $naspath\"test-$timestamp" -ErrorAction SilentlyContinue
+						
+						# lancer un userform
+						Add-Type -AssemblyName System.Windows.Forms
+						$result = [System.Windows.Forms.MessageBox]::Show(
+							"Ajouter la version $latestversion sur le serveur ?",
+							"Confirmation",
+							[System.Windows.Forms.MessageBoxButtons]::YesNo,
+							[System.Windows.Forms.MessageBoxIcon]::Question
+						)
+
+						# telecharger le toolset sur le serveur
+						if ($result -eq "Yes") {
+							Write-Output "About to download toolset..."
+							$url="https://github.com/philippe-hjik/standard-toolset/releases/latest/download/toolset.zip"
+							$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
+							$archivename = "toolset-$timestamp"
+							$archivepath = "$naspath\v$latestversion.zip"
+
+							if (-not (DownloadWithBits -Url $url -Destination $archivepath)) {
+							exit 1
+							}
+						}
+					} catch {
+						Write-Warning "pas les droits d'écriture sur le serveur"
+					}
+
+				} else {
+					# Where the toolset will be installed or already installed
+					# TODO l'installation peut être fait sur le d: à prendre en compte
+					$installpath = "C:\inf-toolset"
+
+					# Get current toolset version
+					$localversion = Get-Content "$installpath\VERSION.txt"
+					$localversion = $localversion -replace '^v'
+
+					# Check if a toolset was already installed
+					if(Test-Path $installpath)
+					{
+						# Check higher version between NAS and current toolset version
+						if([version]$naslatestversion -gt [version]$localversion)
+						{
+							Write-Output "About to copy toolset from NAS server..."
+							$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
+							$archivename = "toolset-$timestamp"
+							$archivepath = "$env:TEMP\$archivename.zip"
+							
+							Write-Output "$archivepath"
+
+							# TODO checker quel exit utiliser exit 1,2,3 ?
+							try {
+								Copy-Item -Path "$naspath\v$naslatestversion.zip" -Destination $archivepath
+							} catch {
+								Write-Error "Erreur 87"
+								exit 1
+							}
+
+							# $env:TEMP may bring "path too long issue..."
+							$archivedirectory = "$env:USERPROFILE\ets$(Get-Random)"
+							Write-Output "About to extract $archivepath to $archivedirectory"
+							Expand-Archive $archivepath $archivedirectory
+							
+							# Compress-Archive excludes (hard coded) .git directories.. they have been renamed before zipping, they need to be adjusted!
+							Get-ChildItem -Path $archivedirectory -Recurse -Directory -Force -Filter ".git-force" | Rename-Item -NewName ".git"
+
+							# Install
+							Write-Output "About to launch install script"
+							Set-Location $archivedirectory
+							& .\install.ps1 -Destination "$installpath" -Nointeraction $Nointeraction
+
+							# Cleaning up
+							Write-Output "Trying to clean up some stuff"
+							try {
+								Remove-Item -Force -Recurse "$archivedirectory/scoop"
+								Remove-Item -Force -Recurse "$archivedirectory"    
+							}
+							catch {
+								Write-Warning "Unable to clean $archivedirectory : $_. "
+							}
+						}
+					} else {
+						Write-Output "no tag version found"
+					}
+				}
+			} else {
+				Write-Output "$localarchivepath, $naspath"
+			}
 	    }
 	    else{
 		Write-Error "No local archive found, aborting local install"
+		Write-Error "Searching in"
 		Exit 2
 	    }
 	}
@@ -94,7 +206,6 @@ function Main{
 	    Write-Warning "Unable to clean $archivedirectory : $_. "
 	}
 
-	
 	if(!$local)
 	{
 	    Remove-Item $archivepath
