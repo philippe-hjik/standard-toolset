@@ -37,13 +37,13 @@ function Main{
 		$localarchivepath=$Source
 	    }
 	    
-	    if(![string]::IsNullOrEmpty($localarchivepath))
+	    if(![string]::IsNullOrEmpty($a))
 	    {
 			$archivepath = $localarchivepath
 			Write-Host "Found local $archivepath"
 			$naspath = "C:\Users\philippe\Desktop\nas\toolset"
 			# $naspath = "L:\toolset"
-			if($localarchivepath -like "$naspath*")
+			if($localarchivepath.StartsWith($naspath))
 			{
 				# Get latest version tag on GitHub ex: v1.13.1
 				$url = "https://api.github.com/repos/philippe-hjik/standard-toolset/releases/latest"
