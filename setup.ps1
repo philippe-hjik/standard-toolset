@@ -41,8 +41,8 @@ function Main{
 	    {
 			$archivepath = $localarchivepath
 			Write-Host "Found local $archivepath"
-			$naspath = "C:\Users\philippe\Desktop\nas\toolset"
-			# $naspath = "L:\toolset"
+			#$naspath = "C:\Users\philippe\Desktop\nas\toolset"
+			$naspath = "L:\toolset"
 			if($localarchivepath.StartsWith($naspath))
 			{
 				# Get latest version tag on GitHub ex: v1.13.1

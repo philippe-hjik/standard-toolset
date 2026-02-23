@@ -42,6 +42,13 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
 
 - Décompresser l’archive et lancer ‘install.ps1’ [complete offline]
 
+- Télécharger l'archive depuis le serveur nas
+```pwsh
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+& ([ScriptBlock]::Create((Invoke-RestMethod -Uri https://github.com/philippe-hjik/standard-toolset/raw/main/setup.ps1))) -Source "L:\toolset\vX.X.X.zip"
+```
+
+
 ## **Activation**
 Quand le toolset a été installé sur une machine, il faut lancer ‘c:\inf-toolset\activate.ps1’ ou ‘d:\data\inf-toolset\activate.ps1’ pour l’activer.
 Cela va finaliser l’installation (si nécessaire), ajouter les apps dans le PATH et ajouter les menus contextuels (pour vscode par exemple).
