@@ -85,6 +85,15 @@ jobs:
              Get-ChildItem -Path "build" -Recurse -Directory -Force -Filter ".git" | Rename-Item -NewName ".git-force"
              Compress-Archive build/* toolset.zip
 
+      - name: Create asset release
+        if: steps.release.outputs.release_created
+        shell: pwsh
+        run: |
+             New-Item -ItemType Directory -Path "apps" -Force
+             Get-ChildItem -Path "build\scoop\app" | ForEach-Object {
+              Compress-Archive -Path $_.FullName -DestinationPath "apps\($_.Name).zip" -Force
+             }
+
       - name: Upload archive
         if: ${{steps.release.outputs.release_created}}
         env:
@@ -92,4 +101,5 @@ jobs:
         run: |
           gh release upload ${{ steps.release.outputs.tag_name }} toolset.zip
           gh release upload ${{ steps.release.outputs.tag_name }} versions.txt
+          gh release upload ${{ steps.release.outputs.tag_name }} apps/*.zip
 
