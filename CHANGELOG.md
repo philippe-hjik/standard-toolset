@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.15.2](https://github.com/philippe-hjik/standard-toolset/compare/v1.15.0...v1.15.2) (2026-02-25)
+
+
+### Bug Fixes
+
+* **workflow:** mock workflow, function order ([1e80f68](https://github.com/philippe-hjik/standard-toolset/commit/1e80f68e8a73fefb389c6204b24a89168b4ee48c))
+
+
+### Miscellaneous Chores
+
+* release 1.14.1 ([0a23286](https://github.com/philippe-hjik/standard-toolset/commit/0a2328699d5aeb9cc646ea6502101159ac8a5f29))
+* release 1.15.1 ([f71f6f8](https://github.com/philippe-hjik/standard-toolset/commit/f71f6f89a6556b2ea7f843254116eeaa49fc0d24))
+* release 1.15.2 ([4c24aa2](https://github.com/philippe-hjik/standard-toolset/commit/4c24aa2cea9e49eba4ce03979d3797db1ba4a755))
+
 ## [1.15.0](https://github.com/philippe-hjik/standard-toolset/compare/v1.14.1...v1.15.0) (2026-02-25)
 
 
