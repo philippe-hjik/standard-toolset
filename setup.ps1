@@ -41,8 +41,8 @@ function Main{
 	    {
 			$archivepath = $localarchivepath
 			Write-Host "Found local $archivepath"
-			#$naspath = "C:\Users\philippe\Desktop\nas\toolset"
-			$naspath = "L:\toolset"
+			$naspath = "C:\Users\philippe\Desktop\nas\toolset"
+			#$naspath = "L:\toolset"
 			if($localarchivepath.StartsWith($naspath))
 			{
 				# Get latest version tag on GitHub ex: v1.13.1
@@ -75,7 +75,8 @@ function Main{
 							[System.Windows.Forms.MessageBoxButtons]::YesNo,
 							[System.Windows.Forms.MessageBoxIcon]::Question
 						)
-
+						
+						# TODO checker la version déjà installé 
 						# telecharger le toolset sur le serveur
 						if ($result -eq "Yes") {
 							Write-Output "About to download toolset..."
@@ -92,7 +93,7 @@ function Main{
 						Write-Warning "pas les droits d'écriture sur le serveur"
 					}
 
-				} else {
+				} else {	
 					# Where the toolset will be installed or already installed
 					# TODO l'installation peut être fait sur le d: à prendre en compte
 					$installpath = "C:\inf-toolset"
