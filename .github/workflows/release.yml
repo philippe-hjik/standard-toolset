@@ -83,7 +83,7 @@ jobs:
         run: |
              build\scoop\shims\scoop cache rm *
              Get-ChildItem -Path "build" -Recurse -Directory -Force -Filter ".git" | Rename-Item -NewName ".git-force"
-             Compress-Archive build/* toolset.zip
+             Compress-Archive -Path (Get-ChildItem build -Exclude scoop) -DestinationPath toolset.zip
 
       - name: Create asset release
         if: steps.release.outputs.release_created
@@ -102,4 +102,4 @@ jobs:
           gh release upload ${{ steps.release.outputs.tag_name }} toolset.zip
           gh release upload ${{ steps.release.outputs.tag_name }} versions.txt
           gh release upload ${{ steps.release.outputs.tag_name }} apps/*.zip
-
+          
