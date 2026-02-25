@@ -81,7 +81,8 @@ jobs:
         run: |
              New-Item -ItemType Directory -Path "apps" -Force
              Get-ChildItem -Path "build\scoop\apps" | ForEach-Object {
-              Compress-Archive -Path $_.FullName -DestinationPath "apps\($_.Name).zip" -Force
+              $destination = Join-Path -Path "apps" -ChildPath ($_.Name + ".zip")
+              Compress-Archive -Path $_.FullName -DestinationPath $destination
              }
 
       # WARNING: use full path to scoop as PATH var has died in previous step
