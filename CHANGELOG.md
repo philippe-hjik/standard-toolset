@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.15.3](https://github.com/philippe-hjik/standard-toolset/compare/v1.15.3...v1.15.3) (2026-02-25)
+
+
+### Bug Fixes
+
+* **workflow:** path problem archive ([090a465](https://github.com/philippe-hjik/standard-toolset/commit/090a46590c78182b722eeee6679234dc623000dc))
+
+
+### Miscellaneous Chores
+
+* release 1.15.3 ([0abc1f2](https://github.com/philippe-hjik/standard-toolset/commit/0abc1f2fccef7e1483d389470776c2147c9dc947))
+
 ## [1.15.3](https://github.com/philippe-hjik/standard-toolset/compare/v1.15.2...v1.15.3) (2026-02-25)
 
 
