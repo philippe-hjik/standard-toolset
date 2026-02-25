@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.15.0](https://github.com/philippe-hjik/standard-toolset/compare/v1.14.1...v1.15.0) (2026-02-25)
+
+
+### Features
+
+* **workflow:** add release assets ([0765532](https://github.com/philippe-hjik/standard-toolset/commit/07655326656b3293534a4473298360c6e1aa5df3))
+* **workflow:** remove scoop from zip ([485e1dd](https://github.com/philippe-hjik/standard-toolset/commit/485e1dd6402ea10c9bed95c9529fc544b955d30b))
+
+
+### Miscellaneous Chores
+
+* release 1.15.0 ([eb14a2d](https://github.com/philippe-hjik/standard-toolset/commit/eb14a2d47a37929756087f9e07efbb84a72f0d61))
+
 ## [1.14.1](https://github.com/philippe-hjik/standard-toolset/compare/v1.13.1...v1.14.1) (2026-02-23)
 
 
