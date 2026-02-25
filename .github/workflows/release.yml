@@ -80,7 +80,7 @@ jobs:
         shell: pwsh
         run: |
              New-Item -ItemType Directory -Path "apps" -Force
-             Get-ChildItem -Path "build\scoop\app" | ForEach-Object {
+             Get-ChildItem -Path "build\scoop\apps" | ForEach-Object {
               Compress-Archive -Path $_.FullName -DestinationPath "apps\($_.Name).zip" -Force
              }
 
