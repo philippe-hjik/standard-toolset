@@ -1,5 +1,45 @@
 # Changelog
 
+## [1.14.1](https://github.com/philippe-hjik/standard-toolset/compare/v1.13.1...v1.14.1) (2026-02-23)
+
+
+### Features
+
+* **nas_deployement:** add admin copy option ([3723e28](https://github.com/philippe-hjik/standard-toolset/commit/3723e2883a81accbeece0a6883806f4215c7c68d))
+* **WIP:** nas deployment ([c6fe029](https://github.com/philippe-hjik/standard-toolset/commit/c6fe029a9b7d9af6ffd5a43a7c17cdcabdcdfae1))
+* **WIP:** nas_deployment Copy-Item, extract file and install ([d53a15a](https://github.com/philippe-hjik/standard-toolset/commit/d53a15aae74972ca0903d22c523f949ec056eee7))
+
+
+### Bug Fixes
+
+* **deployment:** -like order ([6da42af](https://github.com/philippe-hjik/standard-toolset/commit/6da42af43d97fa4b87e723913704ab8125b973cb))
+* **deployment:** .zip est un fichier pas un dossier ([6f46979](https://github.com/philippe-hjik/standard-toolset/commit/6f46979bd96646b71985cc67e4424bb9718f1d5a))
+* **deployment:** [versiom] problem ([b667a5c](https://github.com/philippe-hjik/standard-toolset/commit/b667a5c3540eb143b8a445f0921681418a2d39dc))
+* **deployment:** add path instead of current directory ([4176542](https://github.com/philippe-hjik/standard-toolset/commit/417654273fe306a66df4d75bd81bebfa5d686fce))
+* **deployment:** added [version] tag for if statement ([0da38ec](https://github.com/philippe-hjik/standard-toolset/commit/0da38ec639f6d2670f10f616b0d9f657534f7278))
+* **deployment:** added extention to file ([dfed95e](https://github.com/philippe-hjik/standard-toolset/commit/dfed95e1444d9444d8e9f8c16ce3d6989827a1cc))
+* **deployment:** added v to path ([2198c7a](https://github.com/philippe-hjik/standard-toolset/commit/2198c7a5eea5da7c1582f5b6a772f7f0886278b6))
+* **deployment:** Get-Content had still v.1 ([c118718](https://github.com/philippe-hjik/standard-toolset/commit/c11871829482a687e02f2726c28bb45110442333))
+* **deployment:** had to remove v in v.1.2.2 for [version] to function ([a4f2a6b](https://github.com/philippe-hjik/standard-toolset/commit/a4f2a6b7ccce5fe2b40b57d8a96e6a4be9d57ae9))
+* **deployment:** implementation error ([a92f2f2](https://github.com/philippe-hjik/standard-toolset/commit/a92f2f221ea3b02e8443b96d250b5f2f8c289cb1))
+* **deployment:** misplaced variable not found ([7ed2e6a](https://github.com/philippe-hjik/standard-toolset/commit/7ed2e6a1b418ee4a76650add1ee684a68a587eab))
+* **deployment:** operator problem,  -like order inverse ([9cb7438](https://github.com/philippe-hjik/standard-toolset/commit/9cb7438ea75c600290ad6240c296b6bc1b824807))
+* **deployment:** remove 's' from variable name ([dc60334](https://github.com/philippe-hjik/standard-toolset/commit/dc603341469e1c58cc4311d0350c9ca84ad32b54))
+* **deployment:** replace query ([3aa1214](https://github.com/philippe-hjik/standard-toolset/commit/3aa1214e47af0ac67d47a27d933f1fe38e90e835))
+* **deployment:** unused code ([ea0d763](https://github.com/philippe-hjik/standard-toolset/commit/ea0d763c3be6bed40425b5a1c16d3872644f498c))
+* **deployment:** v.1.1 != v1.1.zip ([6a7f3bf](https://github.com/philippe-hjik/standard-toolset/commit/6a7f3bf8a61cffeb90ddc575cbc58f81ab96429f))
+* **nad_deployment:** condition problem ([5d59634](https://github.com/philippe-hjik/standard-toolset/commit/5d596345351d432673633ceeff228f56a927c173))
+* **nas_deployment:** change path -like condition ([38de9e9](https://github.com/philippe-hjik/standard-toolset/commit/38de9e950bc6d44688e7b3e7c354dbdcd02ce3eb))
+* **nas_deployment:** remove test file ([eb81625](https://github.com/philippe-hjik/standard-toolset/commit/eb816259aa9cea5650d5e98eb7b5afc52616598b))
+* **nas_deployment:** variable overrite error ([aaa831d](https://github.com/philippe-hjik/standard-toolset/commit/aaa831d8f16a8c4d374dd78cb2f378a7a9c9e53e))
+* **nodejs:** use lts version ([6039fe4](https://github.com/philippe-hjik/standard-toolset/commit/6039fe42cc86d920f22aa9c21d741bdd9c5b78fe))
+
+
+### Miscellaneous Chores
+
+* release 1.14.1 ([2e1e2a0](https://github.com/philippe-hjik/standard-toolset/commit/2e1e2a043dfc37c646acb5ddebda9457f78b4c1b))
+* release 1.14.1 ([10a82e3](https://github.com/philippe-hjik/standard-toolset/commit/10a82e33e22af7d04d2342fed02b51af7cf24d25))
+
 ## [1.13.1](https://github.com/philippe-hjik/standard-toolset/compare/v1.13.0...v1.13.1) (2026-02-12)
 
 
