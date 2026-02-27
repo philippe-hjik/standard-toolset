@@ -99,6 +99,7 @@ function Main{
 					} catch {
 						Write-Warning "vous n'avez pas les droits d'écriture sur le serveur"
 						Write-Output "installation de la version GitHub $latestversion"
+						Write-Output "$archivepatht"
 					}
 
 				} else {
