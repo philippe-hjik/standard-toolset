@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory=$false,HelpMessage="Path to a toolset.zip file OR a directory where toolset.zip has already been extracted (to accelerate deployment)" )][string]$Source=$null,
     [Parameter(Mandatory=$false,HelpMessage="Target custom folder where to install toolset (usefull for deployments...) [inf-toolset subfolder will be created in it]")][string]$Destination=$null,
     [Parameter(Mandatory=$false, HelpMessage="Disable user ability to chose folder")][bool]$Nointeraction=$true,
-    [Parameter(Mandatory=$false)][bool]$ConsoleOutput = $true
+    [Parameter(Mandatory=$false)][bool]$ConsoleOutput = $true,
+	[switch]$AllApps
 )
 #Use functions to avoid having utils functions at beginning...
 function Main{
@@ -41,17 +42,22 @@ function Main{
 	    {
 			$archivepath = $localarchivepath
 			Write-Host "Found local $archivepath"
-			$naspath = "C:\Users\philippe\Desktop\nas\toolset"
-			#$naspath = "L:\toolset"
+			#$naspath = "C:\Users\philippe\Desktop\nas\toolset"
+			$naspath = "L:\toolset"
+
+			$owner = "philippe-hjik"
+			$repo = "standard-toolset"
+
 			if($localarchivepath.StartsWith($naspath))
 			{
 				# Get latest version tag on GitHub ex: v1.13.1
-				$url = "https://api.github.com/repos/philippe-hjik/standard-toolset/releases/latest"
+				$url = "https://api.github.com/repos/$owner/$repo/releases/latest"
 				$response = Invoke-RestMethod -Uri $url
 				$latestversion = $response.tag_name -replace '^v'
 
-				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName -replace '^v'
-					
+				# Renommer le fichier avec SimVer ou utiliser une librairie pour lire sans dézipper
+				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName -replace '^toolset-v'
+				
 				Write-Output "$naslatestversion et GitHub $latestversion"
 
 				# Check higher version between GitHub and NAS
@@ -67,7 +73,7 @@ function Main{
 						# supprimer ce fichier
 						Remove-Item $naspath\"test-$timestamp" -ErrorAction SilentlyContinue
 						
-						# lancer un userform
+						# lancer un userform validation utilisateur
 						Add-Type -AssemblyName System.Windows.Forms
 						$result = [System.Windows.Forms.MessageBox]::Show(
 							"Ajouter la version $latestversion sur le serveur ?",
@@ -80,31 +86,38 @@ function Main{
 						# telecharger le toolset sur le serveur
 						if ($result -eq "Yes") {
 							Write-Output "About to download toolset..."
-							$url="https://github.com/philippe-hjik/standard-toolset/releases/latest/download/toolset.zip"
+							$url="https://github.com/$owner/$repo/releases/latest/download/toolset.zip"
 							$timestamp = Get-Date -format yyyy_MM_dd_H_mm_ss
 							$archivename = "toolset-$timestamp"
-							$archivepath = "$naspath\v$latestversion.zip"
+							$archivepath = "$naspath\toolset-v$latestversion.zip"
 
 							if (-not (DownloadWithBits -Url $url -Destination $archivepath)) {
 							exit 1
 							}
 						}
+
 					} catch {
-						Write-Warning "pas les droits d'écriture sur le serveur"
+						Write-Warning "vous n'avez pas les droits d'écriture sur le serveur"
+						Write-Output "installation de la version GitHub $latestversion"
 					}
 
-				} else {	
+				} else {
+					
 					# Where the toolset will be installed or already installed
 					# TODO l'installation peut être fait sur le d: à prendre en compte
 					$installpath = "C:\inf-toolset"
 
-					# Get current toolset version
-					$localversion = Get-Content "$installpath\VERSION.txt"
-					$localversion = $localversion -replace '^v'
-
 					# Check if a toolset was already installed
 					if(Test-Path $installpath)
 					{
+						try {
+							# Get current toolset version
+							$localversion = Get-Content "$installpath\VERSION.txt"
+							$localversion = $localversion -replace '^v'
+						} catch {
+							Write-Warning "no version found"
+						}
+
 						# Check higher version between NAS and current toolset version
 						if([version]$naslatestversion -gt [version]$localversion)
 						{
@@ -115,11 +128,10 @@ function Main{
 							
 							Write-Output "$archivepath"
 
-							# TODO checker quel exit utiliser exit 1,2,3 ?
 							try {
 								Copy-Item -Path "$naspath\v$naslatestversion.zip" -Destination $archivepath
 							} catch {
-								Write-Error "Erreur 87"
+								Write-Error "Erreur de copie"
 								exit 1
 							}
 
