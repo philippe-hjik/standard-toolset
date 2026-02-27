@@ -55,10 +55,11 @@ function Main{
 				$response = Invoke-RestMethod -Uri $url
 				$latestversion = $response.tag_name -replace '^v'
 
-				$archivepath = Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1
-				
+				$latestItem = Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -First 1
+				$archivepath = "$naspath\$($latestItem.Name)"
+
 				# Renommer le fichier avec SimVer ou utiliser une librairie pour lire sans dézipper
-				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName -replace '^toolset-v'
+				$naslatestversion = $latestItem.BaseName -replace '^toolset-v'
 				
 				Write-Output "$naslatestversion et GitHub $latestversion"
 
