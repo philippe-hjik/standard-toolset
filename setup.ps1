@@ -55,6 +55,8 @@ function Main{
 				$response = Invoke-RestMethod -Uri $url
 				$latestversion = $response.tag_name -replace '^v'
 
+				$archivepath = Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1
+				
 				# Renommer le fichier avec SimVer ou utiliser une librairie pour lire sans dézipper
 				$naslatestversion = (Get-ChildItem -Path $naspath | Sort-Object -Descending | Select-Object -first 1).BaseName -replace '^toolset-v'
 				
